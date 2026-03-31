@@ -2,198 +2,172 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ingeniería en Informática</title>
+<title>Plan de Estudios</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Quicksand', sans-serif;
-  background: linear-gradient(135deg, #fdf7fa, #f8eaf1);
-}
+body{margin:0;font-family:'Quicksand';background:linear-gradient(135deg,#fdf7fa,#f8eaf1);}
+h1{text-align:center;color:#d46a92;}
 
-h1 {
-  text-align: center;
-  color: #d46a92;
-  font-family: 'Poppins';
-}
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px;}
+.column{background:white;padding:15px;border-radius:20px;width:260px;}
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
+.materia{padding:8px;margin:6px 0;border-radius:10px;color:white;cursor:pointer;font-size:12px;}
+.pendiente{background:#f28cab;}
+.cursando{background:#f6b6c9;color:#6a2e46;}
+.aprobada{background:#d46a92;}
+.bloqueada{background:#ccc;color:#666;cursor:not-allowed;}
 
-.column {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(12px);
-  padding: 20px;
-  border-radius: 20px;
-  width: 240px;
-  box-shadow: 0 10px 25px rgba(212,106,146,0.2);
-}
-
-.column h3 {
-  text-align: center;
-  color: #d46a92;
-}
-
-.materia {
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-  font-size: 12px;
-  transition: 0.3s;
-}
-
-.materia:hover { transform: scale(1.05); }
-
-.pendiente { background:#f28cab; }
-.cursando { background:#f6b6c9; color:#6a2e46; }
-.aprobada { background:#d46a92; }
-
-.bloqueada { background:#ddd !important; color:#888 !important; cursor:not-allowed; }
-
-.progress-container { width:80%; margin:10px auto; }
-.progress-bar { height:18px; background:#f3c6d6; border-radius:20px; overflow:hidden; }
-.progress-fill { height:100%; width:0%; background:#d46a92; }
-
+.bar{height:15px;background:#f3c6d6;margin:10px;border-radius:20px;}
+.fill{height:100%;width:0;background:#d46a92;}
 </style>
 </head>
 
 <body>
 
-<h1>🎀 Mi Plan de Estudios 🎀</h1>
-
-<div class="progress-container">
-<div class="progress-bar">
-<div class="progress-fill" id="progress"></div>
-</div>
-<p id="progressText" style="text-align:center;"></p>
-</div>
+<h1>🎀 Ingeniería en Informática 🎀</h1>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<p id="txt" style="text-align:center;"></p>
 
 <div class="grid">
 
 <!-- AÑO 1 -->
-<div class="column">
-<h3>Año 1</h3>
+<div class="column"><h3>Año 1</h3>
 
-<div class="materia cursando" data-id="3622">03622 - Análisis I</div>
-<div class="materia cursando" data-id="3621">03621 - Discreta</div>
-<div class="materia cursando" data-id="3623">03623 - Prog Inicial</div>
-<div class="materia pendiente" data-id="3624">03624 - Sistemas</div>
-<div class="materia pendiente" data-id="3625">03625 - Numeración</div>
-<div class="materia cursando" data-id="3626">03626 - Calidad</div>
-<div class="materia pendiente" data-id="901">00901 - Inglés I</div>
-<div class="materia pendiente" data-id="911">00911 - Computación I</div>
-<div class="materia pendiente" data-id="3627">03627 - Álgebra I</div>
-<div class="materia bloqueada" data-req="3622">03628 - Física I</div>
+<div class="materia cursando" data-id="d">Matemática Discreta</div>
+<div class="materia cursando" data-id="a1">Análisis Matemático I</div>
+<div class="materia cursando" data-id="p1">Programación Inicial</div>
+<div class="materia pendiente" data-id="si">Introducción a los Sistemas de Información</div>
+<div class="materia pendiente" data-id="sn">Sistemas de Numeración</div>
+<div class="materia cursando" data-id="cs">Principios de Calidad de Software</div>
+<div class="materia pendiente" data-id="i1">Inglés Nivel I</div>
+<div class="materia pendiente" data-id="c1">Computación Nivel I</div>
+<div class="materia pendiente" data-id="alg1">Álgebra y Geometría Analítica I</div>
+<div class="materia bloqueada" data-id="f1" data-req="a1">Física I</div>
+<div class="materia bloqueada" data-id="peb" data-req="p1">Programación Estructurada Básica</div>
+<div class="materia bloqueada" data-id="igr" data-req="si">Introducción a la Gestión de Requisitos</div>
+<div class="materia bloqueada" data-id="emb" data-req="sn">Fundamentos de Sistemas Embebidos</div>
+<div class="materia pendiente" data-id="proj">Introducción a los Proyectos Informáticos</div>
 
 </div>
 
 <!-- AÑO 2 -->
-<div class="column">
-<h3>Año 2</h3>
+<div class="column"><h3>Año 2</h3>
 
-<div class="materia bloqueada" data-req="3622">03633 - Análisis II</div>
-<div class="materia bloqueada" data-req="3628">03634 - Física II</div>
-<div class="materia bloqueada" data-req="3623">03629 - Prog Estructurada</div>
-<div class="materia bloqueada" data-req="3621">03635 - Tópicos Prog</div>
+<div class="materia bloqueada" data-id="i2" data-req="i1">Inglés Nivel II</div>
+<div class="materia bloqueada" data-id="c2" data-req="c1">Computación Nivel II</div>
+<div class="materia bloqueada" data-id="a2" data-req="a1">Análisis Matemático II</div>
+<div class="materia bloqueada" data-id="f2" data-req="f1">Física II</div>
+<div class="materia bloqueada" data-id="top" data-req="d,peb">Tópicos de Programación</div>
+<div class="materia bloqueada" data-id="bd" data-req="d,peb">Bases de Datos</div>
+<div class="materia bloqueada" data-id="as" data-req="igr">Análisis de Sistemas</div>
+<div class="materia bloqueada" data-id="ac" data-req="emb">Arquitectura de Computadoras</div>
+<div class="materia bloqueada" data-id="rsu" data-req="cs">Responsabilidad Social Universitaria</div>
+<div class="materia bloqueada" data-id="i3" data-req="i2">Inglés Nivel III</div>
+<div class="materia bloqueada" data-id="a3" data-req="a2">Análisis Matemático III</div>
+<div class="materia bloqueada" data-id="alg" data-req="top">Algoritmos y Estructuras de Datos</div>
+<div class="materia bloqueada" data-id="bda" data-req="bd">Bases de Datos Aplicadas</div>
+<div class="materia bloqueada" data-id="pds" data-req="cs,as">Principios de Diseño de Sistemas</div>
+<div class="materia bloqueada" data-id="red" data-req="f2,ac">Redes de Computadoras</div>
+<div class="materia bloqueada" data-id="go" data-req="proj">Gestión de las Organizaciones</div>
 
 </div>
 
 <!-- AÑO 3 -->
-<div class="column">
-<h3>Año 3</h3>
+<div class="column"><h3>Año 3</h3>
 
-<div class="materia bloqueada" data-req="3635">03640 - Algoritmos</div>
-<div class="materia bloqueada" data-req="3633">03639 - Análisis III</div>
-<div class="materia bloqueada" data-req="3638">03649 - SO</div>
+<div class="materia bloqueada" data-id="i4" data-req="i3">Inglés Nivel IV</div>
+<div class="materia bloqueada" data-id="alg2" data-req="alg1">Álgebra II</div>
+<div class="materia bloqueada" data-id="par" data-req="a2,alg">Paradigmas de Programación</div>
+<div class="materia bloqueada" data-id="reqa" data-req="pds">Requisitos Avanzados</div>
+<div class="materia bloqueada" data-id="ds" data-req="bd,pds">Diseño de Software</div>
+<div class="materia bloqueada" data-id="so" data-req="ac">Sistemas Operativos</div>
+<div class="materia bloqueada" data-id="seg" data-req="top,ac,red">Seguridad de la Información</div>
+<div class="materia bloqueada" data-id="pps" data-req="pds">Práctica Profesional Supervisada</div>
+<div class="materia bloqueada" data-id="prob" data-req="d,a3,alg2">Probabilidad y Estadística</div>
+<div class="materia bloqueada" data-id="pa" data-req="par,bda">Programación Avanzada</div>
+<div class="materia bloqueada" data-id="arqsoft" data-req="ds">Arquitectura de Sistemas Software</div>
+<div class="materia bloqueada" data-id="virt" data-req="alg,alg2,so">Virtualización de Hardware</div>
+<div class="materia bloqueada" data-id="aud" data-req="seg">Auditoría y Legislación</div>
 
 </div>
 
 <!-- AÑO 4 -->
-<div class="column">
-<h3>Año 4</h3>
+<div class="column"><h3>Año 4</h3>
 
-<div class="materia bloqueada" data-req="3649">03660 - SO Avanzados</div>
-<div class="materia bloqueada" data-req="3646">03658 - Concurrente</div>
+<div class="materia bloqueada" data-id="ea" data-req="bda,prob">Estadística Aplicada</div>
+<div class="materia bloqueada" data-id="aut" data-req="par">Autómatas y Gramáticas</div>
+<div class="materia bloqueada" data-id="pc" data-req="par,virt">Programación Concurrente</div>
+<div class="materia bloqueada" data-id="gds1" data-req="go,reqa,arqsoft">Gestión de Desarrollo de Software I</div>
+<div class="materia bloqueada" data-id="soa" data-req="virt">Sistemas Operativos Avanzados</div>
+<div class="materia bloqueada" data-id="gp" data-req="go,seg,prob">Gestión de Proyectos</div>
+<div class="materia bloqueada" data-id="ma" data-req="prob">Matemática Aplicada</div>
+<div class="materia bloqueada" data-id="lc" data-req="aut">Lenguajes y Compiladores</div>
+<div class="materia bloqueada" data-id="ia" data-req="par,prob">Inteligencia Artificial</div>
+<div class="materia bloqueada" data-id="gds2" data-req="pa,gds1">Gestión de Desarrollo de Software II</div>
+<div class="materia bloqueada" data-id="for" data-req="so,pa,aud">Seguridad Aplicada y Forensia</div>
+<div class="materia bloqueada" data-id="cal" data-req="reqa">Gestión de la Calidad en Procesos de Sistemas</div>
 
 </div>
 
 <!-- AÑO 5 -->
-<div class="column">
-<h3>Año 5</h3>
+<div class="column"><h3>Año 5</h3>
 
-<div class="materia bloqueada" data-req="3660">03671 - Proyecto Final</div>
+<div class="materia bloqueada" data-id="iaa" data-req="ea,ia">Inteligencia Artificial Aplicada</div>
+<div class="materia bloqueada" data-id="inn" data-req="gp">Innovación y Emprendedorismo</div>
+<div class="materia bloqueada" data-id="cd" data-req="ea,ia">Ciencia de Datos</div>
+<div class="materia pendiente">Electiva I</div>
+<div class="materia pendiente">Electiva II</div>
+<div class="materia pendiente">Electiva III</div>
+<div class="materia bloqueada" data-id="pf" data-req="ea,gds1,soa,gp,cal">Proyecto Final de Carrera</div>
 
 </div>
 
 </div>
 
 <script>
-const materias = document.querySelectorAll(".materia");
+const m=document.querySelectorAll(".materia");
 
-materias.forEach(m => {
-  m.addEventListener("click", () => {
+m.forEach(x=>{
+x.onclick=()=>{
+if(x.classList.contains("bloqueada"))return;
 
-    if (m.classList.contains("bloqueada")) return;
+if(x.classList.contains("pendiente"))x.classList.replace("pendiente","cursando");
+else if(x.classList.contains("cursando"))x.classList.replace("cursando","aprobada");
+else x.classList.replace("aprobada","pendiente");
 
-    if (m.classList.contains("pendiente")) {
-      m.classList.replace("pendiente","cursando");
-    } else if (m.classList.contains("cursando")) {
-      m.classList.replace("cursando","aprobada");
-    } else {
-      m.classList.replace("aprobada","pendiente");
-    }
-
-    save();
-    checkUnlock();
-    updateProgress();
-  });
+save();unlock();progress();
+}
 });
 
-function save() {
-  let estados = [];
-  materias.forEach(m => estados.push(m.className));
-  localStorage.setItem("malla", JSON.stringify(estados));
+function unlock(){
+document.querySelectorAll("[data-req]").forEach(x=>{
+let ok=x.dataset.req.split(",").every(r=>document.querySelector(`[data-id="${r}"].aprobada`));
+if(ok){x.classList.remove("bloqueada");x.classList.add("pendiente");}
+});
 }
 
-function load() {
-  let estados = JSON.parse(localStorage.getItem("malla"));
-  if (!estados) return;
-  materias.forEach((m,i)=> m.className = estados[i]);
+function progress(){
+let t=m.length;
+let a=document.querySelectorAll(".aprobada").length;
+let p=(a/t)*100;
+document.getElementById("fill").style.width=p+"%";
+document.getElementById("txt").innerText=a+" / "+t+" ("+Math.round(p)+"%)";
 }
 
-function checkUnlock() {
-  document.querySelectorAll("[data-req]").forEach(m => {
-    let req = m.getAttribute("data-req");
-    let aprobado = document.querySelector(`[data-id="${req}"].aprobada`);
-    if (aprobado) {
-      m.classList.remove("bloqueada");
-      m.classList.add("pendiente");
-    }
-  });
+function save(){
+let s=[];m.forEach(x=>s.push(x.className));
+localStorage.setItem("malla",JSON.stringify(s));
 }
 
-function updateProgress() {
-  let total = materias.length;
-  let aprobadas = document.querySelectorAll(".aprobada").length;
-  let porcentaje = (aprobadas / total) * 100;
-
-  document.getElementById("progress").style.width = porcentaje + "%";
-  document.getElementById("progressText").innerText =
-    aprobadas + " / " + total + " materias aprobadas";
+function load(){
+let s=JSON.parse(localStorage.getItem("malla"));
+if(!s)return;
+m.forEach((x,i)=>x.className=s[i]);
 }
 
-load();
-checkUnlock();
-updateProgress();
+load();unlock();progress();
 </script>
 
 </body>
