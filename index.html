@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ingeniería en Informática</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #fdf7fa, #f8eaf1);
+}
+
+h1 {
+  text-align: center;
+  color: #d46a92;
+  font-family: 'Poppins';
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.column {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 20px;
+  width: 240px;
+  box-shadow: 0 10px 25px rgba(212,106,146,0.2);
+}
+
+.column h3 {
+  text-align: center;
+  color: #d46a92;
+}
+
+.materia {
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.materia:hover { transform: scale(1.05); }
+
+.pendiente { background:#f28cab; }
+.cursando { background:#f6b6c9; color:#6a2e46; }
+.aprobada { background:#d46a92; }
+
+.bloqueada { background:#ddd !important; color:#888 !important; cursor:not-allowed; }
+
+.progress-container { width:80%; margin:10px auto; }
+.progress-bar { height:18px; background:#f3c6d6; border-radius:20px; overflow:hidden; }
+.progress-fill { height:100%; width:0%; background:#d46a92; }
+
+</style>
+</head>
+
+<body>
+
+<h1>🎀 Mi Plan de Estudios 🎀</h1>
+
+<div class="progress-container">
+<div class="progress-bar">
+<div class="progress-fill" id="progress"></div>
+</div>
+<p id="progressText" style="text-align:center;"></p>
+</div>
+
+<div class="grid">
+
+<!-- AÑO 1 -->
+<div class="column">
+<h3>Año 1</h3>
+
+<div class="materia cursando" data-id="3622">03622 - Análisis I</div>
+<div class="materia cursando" data-id="3621">03621 - Discreta</div>
+<div class="materia cursando" data-id="3623">03623 - Prog Inicial</div>
+<div class="materia pendiente" data-id="3624">03624 - Sistemas</div>
+<div class="materia pendiente" data-id="3625">03625 - Numeración</div>
+<div class="materia cursando" data-id="3626">03626 - Calidad</div>
+<div class="materia pendiente" data-id="901">00901 - Inglés I</div>
+<div class="materia pendiente" data-id="911">00911 - Computación I</div>
+<div class="materia pendiente" data-id="3627">03627 - Álgebra I</div>
+<div class="materia bloqueada" data-req="3622">03628 - Física I</div>
+
+</div>
+
+<!-- AÑO 2 -->
+<div class="column">
+<h3>Año 2</h3>
+
+<div class="materia bloqueada" data-req="3622">03633 - Análisis II</div>
+<div class="materia bloqueada" data-req="3628">03634 - Física II</div>
+<div class="materia bloqueada" data-req="3623">03629 - Prog Estructurada</div>
+<div class="materia bloqueada" data-req="3621">03635 - Tópicos Prog</div>
+
+</div>
+
+<!-- AÑO 3 -->
+<div class="column">
+<h3>Año 3</h3>
+
+<div class="materia bloqueada" data-req="3635">03640 - Algoritmos</div>
+<div class="materia bloqueada" data-req="3633">03639 - Análisis III</div>
+<div class="materia bloqueada" data-req="3638">03649 - SO</div>
+
+</div>
+
+<!-- AÑO 4 -->
+<div class="column">
+<h3>Año 4</h3>
+
+<div class="materia bloqueada" data-req="3649">03660 - SO Avanzados</div>
+<div class="materia bloqueada" data-req="3646">03658 - Concurrente</div>
+
+</div>
+
+<!-- AÑO 5 -->
+<div class="column">
+<h3>Año 5</h3>
+
+<div class="materia bloqueada" data-req="3660">03671 - Proyecto Final</div>
+
+</div>
+
+</div>
+
+<script>
+const materias = document.querySelectorAll(".materia");
+
+materias.forEach(m => {
+  m.addEventListener("click", () => {
+
+    if (m.classList.contains("bloqueada")) return;
+
+    if (m.classList.contains("pendiente")) {
+      m.classList.replace("pendiente","cursando");
+    } else if (m.classList.contains("cursando")) {
+      m.classList.replace("cursando","aprobada");
+    } else {
+      m.classList.replace("aprobada","pendiente");
+    }
+
+    save();
+    checkUnlock();
+    updateProgress();
+  });
+});
+
+function save() {
+  let estados = [];
+  materias.forEach(m => estados.push(m.className));
+  localStorage.setItem("malla", JSON.stringify(estados));
+}
+
+function load() {
+  let estados = JSON.parse(localStorage.getItem("malla"));
+  if (!estados) return;
+  materias.forEach((m,i)=> m.className = estados[i]);
+}
+
+function checkUnlock() {
+  document.querySelectorAll("[data-req]").forEach(m => {
+    let req = m.getAttribute("data-req");
+    let aprobado = document.querySelector(`[data-id="${req}"].aprobada`);
+    if (aprobado) {
+      m.classList.remove("bloqueada");
+      m.classList.add("pendiente");
+    }
+  });
+}
+
+function updateProgress() {
+  let total = materias.length;
+  let aprobadas = document.querySelectorAll(".aprobada").length;
+  let porcentaje = (aprobadas / total) * 100;
+
+  document.getElementById("progress").style.width = porcentaje + "%";
+  document.getElementById("progressText").innerText =
+    aprobadas + " / " + total + " materias aprobadas";
+}
+
+load();
+checkUnlock();
+updateProgress();
+</script>
+
+</body>
+</html>
